@@ -1,0 +1,57 @@
+name: Update Rule HTML via Gemini
+
+on:
+  issues:
+    types: [opened, edited]
+
+jobs:
+  update-html:
+    # 事故防止のため、タイトルに [rule-update] が含まれるIssueのみトリガー
+    if: contains(github.event.issue.title, '[rule-update]')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      issues: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          pip install google-generativeai
+
+      - name: Run update script
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          ISSUE_BODY: ${{ github.event.issue.body }}
+        run: |
+          python .github/scripts/update_rules.py
+
+      - name: Commit and Push changes
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add index.html  # 更新対象のHTMLファイルパス
+          if git diff --staged --quiet; then
+            echo "変更はありませんでした。"
+          else
+            git commit -m "docs: ルール変更を反映 (Issue #${{ github.event.issue.number }})"
+            git push
+          fi
+
+      - name: Comment on Issue
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: '🤖 GeminiによってルールHTMLの更新・コミットが完了しました！'
+            })
