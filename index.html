@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>勝つ方につきます 〜勇者と魔王のあいだ〜 公式ルール説明書</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Noto+Sans+JP:wght@400;500;700;900&family=Noto+Serif+JP:wght@600;900&display=swap');
+
+  :root {
+    --bg-main: #0d0f14;
+    --card-bg: rgba(26, 31, 46, 0.85);
+    --card-border: #2a344d;
+    --text-primary: #e6ebf5;
+    --text-secondary: #9aa8c2;
+    --hero-color: #3b82f6;
+    --hero-glow: rgba(59, 130, 246, 0.3);
+    --hero-light: #93c5fd;
+    --demon-color: #ef4444;
+    --demon-glow: rgba(239, 68, 68, 0.3);
+    --demon-light: #fca5a5;
+    --gold: #f59e0b;
+    --gold-light: #fef3c7;
+    --accent: #8b5cf6;
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-family: 'Noto Sans JP', sans-serif;
+    background-color: var(--bg-main);
+    color: var(--text-primary);
+    line-height: 1.7;
+    background-image: 
+      radial-gradient(circle at 15% 15%, rgba(59, 130, 246, 0.12) 0%, transparent 40%),
+      radial-gradient(circle at 85% 15%, rgba(239, 68, 68, 0.12) 0%, transparent 40%),
+      radial-gradient(circle at 50% 80%, rgba(139, 92, 246, 0.08) 0%, transparent 50%);
+    background-attachment: fixed;
+    padding-bottom: 80px;
+  }
+
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 24px 20px;
+  }
+
+  /* Header & Title */
+  header {
+    text-align: center;
+    padding: 40px 10px 30px;
+    position: relative;
+  }
+
+  .sub-tag {
+    font-size: 0.9rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    display: inline-block;
+    padding: 4px 16px;
+    background: rgba(245, 158, 11, 0.1);
+    border: 1px solid rgba(245, 158, 11, 0.3);
+    border-radius: 20px;
+  }
+
+  h1 {
+    font-family: 'Noto Serif JP', serif;
+    font-size: clamp(2rem, 5vw, 2.8rem);
+    font-weight: 900;
+    line-height: 1.3;
+    margin-bottom: 8px;
+    background: linear-gradient(135deg, #fff 20%, #93c5fd 50%, #fca5a5 80%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 30px rgba(255,255,255,0.1);
+  }
+
+  .sub-title {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+    letter-spacing: 0.1em;
+    margin-bottom: 24px;
+  }
+
+  .lead-box {
+    background: linear-gradient(135deg, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.9));
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 36px;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+    text-align: center;
+  }
+
+  .lead-quote {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #fff;
+    margin-top: 10px;
+    padding: 12px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+    border-left: 4px solid var(--gold);
+  }
+
+  /* Section Common */
+  section {
+    margin-bottom: 36px;
+  }
+
+  .card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 14px;
+    padding: 24px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(8px);
+  }
+
+  h2 {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 1.4rem;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 18px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--card-border);
+    color: #fff;
+  }
+
+  h2 .num {
+    font-family: 'Cinzel', serif;
+    background: linear-gradient(135deg, var(--hero-color), var(--demon-color));
+    color: #fff;
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  h3 {
+    font-size: 1.1rem;
+    margin: 18px 0 10px;
+    color: var(--gold-light);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  h3::before {
+    content: "◆";
+    color: var(--gold);
+    font-size: 0.8em;
+  }
+
+  p {
+    margin-bottom: 12px;
+    color: var(--text-primary);
+  }
+
+  /* Factions split */
+  .faction-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 16px 0;
+  }
+
+  @media (max-width: 640px) {
+    .faction-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .faction-card {
+    border-radius: 10px;
+    padding: 16px 20px;
+    border: 1px solid;
+  }
+
+  .faction-hero {
+    background: rgba(59, 130, 246, 0.08);
+    border-color: rgba(59, 130, 246, 0.3);
+  }
+
+  .faction-hero h4 {
+    color: var(--hero-light);
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .faction-demon {
+    background: rgba(239, 68, 68, 0.08);
+    border-color: rgba(239, 68, 68, 0.3);
+  }
+
+  .faction-demon h4 {
+    color: var(--demon-light);
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .tag-badge {
+    font-size: 0.75rem;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-weight: 700;
+  }
+
+  .badge-hero { background: var(--hero-color); color: #fff; }
+  .badge-demon { background: var(--demon-color); color: #fff; }
+  .badge-pool { background: #475569; color: #fff; }
+
+  /* Lists */
+  ul {
+    list-style-type: none;
+    margin-bottom: 12px;
+  }
+
+  li {
+    position: relative;
+    padding-left: 18px;
+    margin-bottom: 6px;
+  }
+
+  li::before {
+    content: "•";
+    position: absolute;
+    left: 4px;
+    color: var(--gold);
+    font-weight: bold;
+  }
+
+  /* Flow chart / Step boxes */
+  .flow-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: 16px 0;
+  }
+
+  .step-box {
+    background: rgba(15, 23, 42, 0.6);
+    border: 1px solid var(--card-border);
+    border-radius: 8px;
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .step-num {
+    background: var(--card-border);
+    color: var(--gold);
+    font-weight: 900;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+    flex-shrink: 0;
+  }
+
+  .step-content {
+    font-weight: 600;
+  }
+
+  /* Table styling */
+  .styled-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin: 16px 0;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--card-border);
+  }
+
+  .styled-table th, .styled-table td {
+    padding: 12px 14px;
+    text-align: left;
+  }
+
+  .styled-table th {
+    background: #1e293b;
+    color: var(--gold-light);
+    font-weight: 700;
+    font-size: 0.9rem;
+    border-bottom: 1px solid var(--card-border);
+  }
+
+  .styled-table td {
+    background: rgba(15, 23, 42, 0.4);
+    border-bottom: 1px solid rgba(42, 52, 77, 0.4);
+    font-size: 0.95rem;
+  }
+
+  .styled-table tr:last-child td {
+    border-bottom: none;
+  }
+
+  .styled-table tr:hover td {
+    background: rgba(30, 41, 59, 0.5);
+  }
+
+  /* Event Grid */
+  .event-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 12px;
+    margin-top: 14px;
+  }
+
+  .event-card {
+    background: rgba(15, 23, 42, 0.6);
+    border: 1px solid var(--card-border);
+    border-radius: 8px;
+    padding: 14px;
+    border-left: 4px solid var(--accent);
+  }
+
+  .event-name {
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 6px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .event-count {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    background: rgba(255,255,255,0.06);
+    padding: 2px 6px;
+    border-radius: 4px;
+  }
+
+  .event-desc {
+    font-size: 0.88rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+  }
+
+  /* Callout & Examples */
+  .example-box {
+    background: rgba(245, 158, 11, 0.06);
+    border: 1px dashed rgba(245, 158, 11, 0.3);
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin: 12px 0;
+    font-size: 0.92rem;
+  }
+
+  .example-title {
+    font-weight: 700;
+    color: var(--gold);
+    margin-bottom: 4px;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .badge-warn {
+    display: inline-block;
+    background: rgba(245, 158, 11, 0.2);
+    color: var(--gold);
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    margin-right: 6px;
+  }
+
+  .highlight {
+    color: #fff;
+    font-weight: 700;
+  }
+
+  .footer {
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    margin-top: 40px;
+    border-top: 1px solid var(--card-border);
+    padding-top: 20px;
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <header>
+    <div class="sub-tag">Tactical Betrayal Board Game</div>
+    <h1>勝つ方につきます</h1>
+    <div class="sub-title">〜勇者と魔王のあいだ〜 公式ルール説明書</div>
+  </header>
+
+  <!-- 1. ゲーム概要 -->
+  <div class="lead-box">
+    <p>プレイヤーは、人間と魔族の間に生まれた「どちらにも属しきれない者」となります。<br>
+    戦いを続ける「勇者軍」と「魔王軍」のどちらにつくかを判断し、ときには戦況を見て裏切りながら、自分の得点を伸ばしていきます。</p>
+    <div class="lead-quote">
+      重要なのは忠誠ではありません。<br>
+      「今、どちらにつくのが自分にとって最も得か」を判断するゲームです。
+    </div>
+  </div>
+
+  <!-- 2. 勝利条件 & コンポーネント -->
+  <section class="card">
+    <h2><span class="num">1</span> 勝利条件 & コンポーネント</h2>
+    
+    <div style="margin-bottom: 20px;">
+      <h3>勝利条件</h3>
+      <p>セット終了時に<span class="highlight" style="color: var(--gold); font-size: 1.1em;">16点以上</span>のプレイヤーが出たらゲーム終了。<br>
+      最も累計得点が高いプレイヤーの完全勝利となります。（16点以上が複数いる場合も最高得点者が勝利）</p>
+    </div>
+
+    <h3>使用するコンポーネント</h3>
+    <div class="faction-grid">
+      <div class="faction-card faction-hero">
+        <h4>勇者軍カード <span class="tag-badge badge-hero">計10枚</span></h4>
+        <ul>
+          <li>小攻撃 × 9</li>
+          <li>勇者の一撃 × 1</li>
+        </ul>
+      </div>
+      <div class="faction-card faction-demon">
+        <h4>魔王軍カード <span class="tag-badge badge-demon">計10枚</span></h4>
+        <ul>
+          <li>大攻撃 × 7</li>
+          <li>特守備 × 3</li>
+        </ul>
+      </div>
+    </div>
+
+    <div style="margin-top: 16px;">
+      <h4 style="color: var(--gold-light); margin-bottom: 8px;">その他のカード・トークン</h4>
+      <ul>
+        <li><strong>イベントカード（計13枚）：</strong> 平穏×4、粛清×2、革命×1、飢餓×1、混乱×1、工作破壊×1、魔王軍覚醒×2、闇の咆哮×1</li>
+        <li><strong>各プレイヤートークン：</strong> 裏切りトークン×5、勇者軍忠誠トークン×最大1、魔王軍忠誠トークン×最大1</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 3. ゲームの進行構造 -->
+  <section class="card">
+    <h2><span class="num">2</span> ゲームの進行フロー</h2>
+    <p>ゲームは複数の「<strong>セット</strong>」で進行します。1セット内で勇者軍または魔王軍のどちらかが勝利するまで「<strong>戦闘ラウンド</strong>」を繰り返します。</p>
+    
+    <div class="flow-steps">
+      <div class="step-box">
+        <div class="step-num">1</div>
+        <div class="step-content">初期ベット（セット開始時に陣営を決定・序列確定）</div>
+      </div>
+      <div class="step-box">
+        <div class="step-num">2</div>
+        <div class="step-content">戦闘ラウンドの実行（決着するまで繰り返し）</div>
+      </div>
+      <div class="step-box">
+        <div class="step-num">3</div>
+        <div class="step-content">勇者軍 または 魔王軍の勝利（セット決着）</div>
+      </div>
+      <div class="step-box">
+        <div class="step-num">4</div>
+        <div class="step-content">得点計算 & 忠誠判定</div>
+      </div>
+      <div class="step-box">
+        <div class="step-num">5</div>
+        <div class="step-content">16点到達者がいなければ、親を右隣に移して次のセットへ</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. 初期ベットと序列 -->
+  <section class="card">
+    <h2><span class="num">3</span> セット開始：初期ベットと序列</h2>
+    <p>全プレイヤーはセット開始時に「<strong>勇者軍</strong>」または「<strong>魔王軍</strong>」のどちらにつくかを宣言します。<br>
+    同じ陣営内では、加入した順番によって<strong>序列</strong>が決まります。</p>
+    
+    <table class="styled-table">
+      <thead>
+        <tr>
+          <th>序列</th>
+          <th>決定方法</th>
+          <th>役割・特徴</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong style="color: var(--gold);">幹部</strong></td>
+          <td>陣営に<strong>最初</strong>に加入した人</td>
+          <td>セット勝利時に「幹部ボーナス(+1点)」の権利を得る。</td>
+        </tr>
+        <tr>
+          <td><strong style="color: var(--accent);">下っ端</strong></td>
+          <td>陣営に<strong>最後</strong>に加入した人</td>
+          <td>毎ラウンド「下っ端効果（情報操作）」を行使できる。</td>
+        </tr>
+      </tbody>
+    </table>
+    <p style="font-size: 0.9rem; color: var(--text-secondary);">
+      ※1人しかいない陣営では、そのプレイヤーが「幹部兼下っ端」となります。<br>
+      ※同時に宣言した場合は、親から時計回りの順番で優先順位を決定します。
+    </p>
+  </section>
+
+  <!-- 5. 戦闘ラウンドの流れ -->
+  <section class="card">
+    <h2><span class="num">4</span> 戦闘ラウンドの流れ</h2>
+    <p>各戦闘ラウンドは以下の5つのフェイズを順番に進めます。</p>
+
+    <div class="flow-steps">
+      <div class="step-box">
+        <div class="step-num">①</div>
+        <div>
+          <div class="step-content" style="color: var(--gold-light);">下っ端効果フェイズ</div>
+          <div style="font-size: 0.88rem; color: var(--text-secondary);">山札情報の確認・操作（口頭で嘘の報告も可能）</div>
+        </div>
+      </div>
+      <div class="step-box">
+        <div class="step-num">②</div>
+        <div>
+          <div class="step-content" style="color: var(--gold-light);">イベントカード公開フェイズ</div>
+          <div style="font-size: 0.88rem; color: var(--text-secondary);">イベント山札から1枚めくり、効果を即時適用</div>
+        </div>
+      </div>
+      <div class="step-box">
+        <div class="step-num">③</div>
+        <div>
+          <div class="step-content" style="color: var(--gold-light);">裏切りフェイズ</div>
+          <div style="font-size: 0.88rem; color: var(--text-secondary);">プレイヤーはトークンや得点を消費して陣営を鞍替え可能</div>
+        </div>
+      </div>
+      <div class="step-box">
+        <div class="step-num">④</div>
+        <div>
+          <div class="step-content" style="color: var(--gold-light);">戦闘フェイズ</div>
+          <div style="font-size: 0.88rem; color: var(--text-secondary);">勇者軍・魔王軍からカードを1枚ずつ出して判定</div>
+        </div>
+      </div>
+      <div class="step-box">
+        <div class="step-num">⑤</div>
+        <div>
+          <div class="step-content" style="color: var(--gold-light);">エンドフェイズ</div>
+          <div style="font-size: 0.88rem; color: var(--text-secondary);">セット未決着なら次の戦闘ラウンドへ</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. 下っ端効果 -->
+  <section class="card">
+    <h2><span class="num">5</span> 下っ端効果（情報戦）</h2>
+    <div class="faction-grid">
+      <div class="faction-card faction-demon">
+        <h4>魔王軍の下っ端 <span class="tag-badge badge-demon">未来を深く読む</span></h4>
+        <p><strong>魔王軍が少数または同数：</strong><br>勇者山札の<strong>上1枚</strong>を見る。</p>
+        <p><strong>魔王軍が多数派：</strong><br>勇者山札の<strong>上3枚</strong>を見る。</p>
+        <p style="font-size: 0.85rem; color: var(--demon-light);">※カードの並び順は変更できません。</p>
+      </div>
+
+      <div class="faction-card faction-hero">
+        <h4>勇者軍の下っ端 <span class="tag-badge badge-hero">未来を書き換える</span></h4>
+        <p><strong>勇者軍が少数または同数：</strong><br>魔王山札の上1枚を見て、「そのまま上」か「山札の一番下」へ送る。</p>
+        <p><strong>勇者軍が多数派：</strong><br>魔王山札の上2枚を確認し、それぞれ「上」または「一番下」へ移動可能。</p>
+      </div>
+    </div>
+
+    <div class="example-box">
+      <div class="example-title">情報共有のルール（ブラフ可能）</div>
+      下っ端は確認した情報を<strong>必ず口頭で共有</strong>します。ただし、<strong style="color: #fff;">嘘をついても構いません。</strong><br>
+      ※カードそのものを直接他プレイヤーへ見せることは禁止です。
+    </div>
+  </section>
+
+  <!-- 7. イベント一覧 -->
+  <section class="card">
+    <h2><span class="num">6</span> イベントカード一覧</h2>
+    <p>下っ端効果の後、イベントカードを1枚公開します。効果は原則そのラウンドのみ有効です。</p>
+
+    <div class="event-grid">
+      <div class="event-card">
+        <div class="event-name"><span>平穏</span> <span class="event-count">4枚</span></div>
+        <div class="event-desc">何も起こりません。平穏な戦況です。</div>
+      </div>
+      <div class="event-card">
+        <div class="event-name"><span>粛清</span> <span class="event-count">2枚</span></div>
+        <div class="event-desc">両軍の幹部を一番後ろへ移動させ下っ端にします（1人陣営は対象外）。新下っ端の能力発動は次ラウンドから。序列変更はセット中継続。</div>
+      </div>
+      <div class="event-card">
+        <div class="event-name"><span>革命</span> <span class="event-count">1枚</span></div>
+        <div class="event-desc">このラウンドでセットが決着した場合、「幹部ボーナス+1点」が無効化されます。決着しなければ何も起こりません。</div>
+      </div>
+      <div class="event-card">
+        <div class="event-name"><span>飢餓</span> <span class="event-count">1枚</span></div>
+        <div class="event-desc">ラウンド終了時、<strong>人数が多い陣営に所属する全員</strong>が累計得点-1（勝敗不問 / 0点未満にはならない）。同数の場合は不発。</div>
+      </div>
+      <div class="event-card">
+        <div class="event-name"><span>混乱</span> <span class="event-count">1枚</span></div>
+        <div class="event-desc">このラウンドの裏切りでは、全プレイヤーがトークンや得点を消費せず「無料」で1回裏切れます。</div>
+      </div>
+      <div class="event-card">
+        <div class="event-name"><span>工作破壊</span> <span class="event-count">1枚</span></div>
+        <div class="event-desc">両軍の残り山札をシャッフルします。下っ端の山札情報は無効化されます（過去情報としての会話は可能）。</div>
+      </div>
+      <div class="event-card">
+        <div class="event-name"><span>魔王軍覚醒</span> <span class="event-count">2枚</span></div>
+        <div class="event-desc">魔王軍はカードを2枚引きます。勇者カード公開前に魔王軍幹部が使用する1枚を選択し、残りは山札の一番下へ戻します。</div>
+      </div>
+      <div class="event-card">
+        <div class="event-name"><span>闇の咆哮</span> <span class="event-count">1枚</span></div>
+        <div class="event-desc">このラウンドのみ、「大攻撃」成功時の攻撃成功数を<strong>+2</strong>（例：成功数1で成功→3になり即座に魔王軍勝利）。</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. 裏切り & 寝返りボーナス -->
+  <section class="card">
+    <h2><span class="num">7</span> 裏切りシステム & 寝返りボーナス</h2>
+    <p>イベント公開後、プレイヤーは反対陣営へ裏切ることができます。</p>
+    
+    <div style="margin: 16px 0;">
+      <h4 style="color: var(--gold-light); margin-bottom: 8px;">裏切りのコスト</h4>
+      <ul>
+        <li><strong>1〜5回目の裏切り：</strong> 「裏切りトークン」を1個消費して無料で裏切る。</li>
+        <li><strong>6回目以降の裏切り：</strong> 以下のいずれかを選択して支払う。
+          <ol style="margin-left: 20px; margin-top: 4px;">
+            <li>離脱する陣営の「忠誠トークン」を1個消費する</li>
+            <li>自身の「累計得点」を -1 点する（※現在得点が0点の場合は選択不可）</li>
+          </ol>
+        </li>
+      </ul>
+    </div>
+
+    <div class="example-box">
+      <div class="example-title">寝返り成功ボーナス (+1点)</div>
+      <strong>セット開始時とは異なる陣営</strong>に所属した状態でその陣営が勝利した場合、寝返り成功として <span class="highlight" style="color: var(--gold);">+1点</span> を獲得！
+      <div style="font-size: 0.85rem; margin-top: 6px; color: var(--text-secondary);">
+        ✔ 魔王軍で開始 → 勇者軍へ裏切る → 勇者軍勝利 ＝ <strong>適用（+1点）</strong><br>
+        ✖ 魔王軍で開始 → 勇者軍へ裏切る → 再び魔王軍に戻る → 魔王軍勝利 ＝ <strong>不適用（開始時と同陣営のため）</strong>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. 戦闘 & 勝敗判定 -->
+  <section class="card">
+    <h2><span class="num">8</span> 戦闘の組み合わせと効果</h2>
+    <p>勇者軍山札の上1枚と、魔王軍山札の上1枚をめくって対戦させます。</p>
+
+    <table class="styled-table">
+      <thead>
+        <tr>
+          <th style="width: 35%;">組み合わせ</th>
+          <th>戦闘結果と処理</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong style="color: var(--hero-light);">小攻撃</strong> × <strong style="color: var(--demon-light);">大攻撃</strong></td>
+          <td>魔王軍の攻撃成功。<strong style="color: var(--demon-light);">魔王軍の成功数 +1</strong></td>
+        </tr>
+        <tr>
+          <td><strong style="color: var(--hero-light);">小攻撃</strong> × <strong style="color: var(--demon-light);">特守備</strong></td>
+          <td>相殺。何も起こりません。</td>
+        </tr>
+        <tr>
+          <td><strong style="color: var(--gold);">勇者の一撃</strong> × <strong style="color: var(--demon-light);">大攻撃</strong></td>
+          <td><strong style="color: var(--gold); font-size: 1.05em;">その瞬間に勇者軍のセット勝利！</strong></td>
+        </tr>
+        <tr>
+          <td><strong style="color: var(--gold);">勇者の一撃</strong> × <strong style="color: var(--demon-light);">特守備</strong></td>
+          <td>
+            <strong>勇者の一撃が防がれる！</strong> 以下のリセット＆圧縮処理を行う：
+            <ol style="margin-left: 20px; font-size: 0.88rem; margin-top: 4px; color: var(--text-secondary);">
+              <li>魔王軍の攻撃成功数を <strong>0</strong> にリセット</li>
+              <li>魔王軍山札を10枚に戻してシャッフル</li>
+              <li>勇者軍の捨て札にある「小攻撃」を<strong>最大3枚ゲームから除外</strong></li>
+              <li>「勇者の一撃」＋残りの「小攻撃」で勇者山札を作り直す</li>
+              <li>同じセットをそのまま続行（※戦闘が長引くほど勇者の一撃が出やすくなる！）</li>
+            </ol>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>セット勝利条件</h3>
+    <div class="faction-grid">
+      <div class="faction-card faction-demon">
+        <h4>魔王軍の勝利条件</h4>
+        <p>大攻撃を累計 <strong style="color: var(--demon-light); font-size: 1.1em;">3回成功</strong> させる。</p>
+      </div>
+      <div class="faction-card faction-hero">
+        <h4>勇者軍の勝利条件</h4>
+        <p>「勇者の一撃」を魔王軍の「大攻撃」に <strong style="color: var(--hero-light); font-size: 1.1em;">直撃</strong> させる。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10. 得点計算 & 忠誠トークン -->
+  <section class="card">
+    <h2><span class="num">9</span> セット決着時の得点計算</h2>
+    <p>セットが終了したら、勝利した陣営に所属しているプレイヤー全員が得点を獲得します。</p>
+
+    <div class="faction-grid" style="margin-bottom: 16px;">
+      <div class="faction-card faction-demon">
+        <h4>魔王軍 配点プール <span class="tag-badge badge-pool">8点</span></h4>
+        <p style="font-size: 0.95rem;">基本点 ＝ <strong>8 ÷ 魔王軍人数</strong>（端数切り上げ）</p>
+      </div>
+      <div class="faction-card faction-hero">
+        <h4>勇者軍 配点プール <span class="tag-badge badge-pool">13点</span></h4>
+        <p style="font-size: 0.95rem;">基本点 ＝ <strong>13 ÷ 勇者軍人数</strong>（端数切り上げ）</p>
+      </div>
+    </div>
+
+    <h3>加算ボーナス一覧</h3>
+    <table class="styled-table">
+      <thead>
+        <tr>
+          <th>ボーナス名</th>
+          <th>条件</th>
+          <th>獲得点</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>多数派ボーナス</strong></td>
+          <td>勝利陣営の人数が相手陣営より多い場合、所属者全員</td>
+          <td><span style="color: var(--gold);">+1 点</span></td>
+        </tr>
+        <tr>
+          <td><strong>幹部ボーナス</strong></td>
+          <td>勝利陣営の幹部（※「革命」発生時は無効）</td>
+          <td><span style="color: var(--gold);">+1 点</span></td>
+        </tr>
+        <tr>
+          <td><strong>寝返り成功ボーナス</strong></td>
+          <td>セット開始時と異なる陣営で勝利を迎えたプレイヤー</td>
+          <td><span style="color: var(--gold);">+1 点</span></td>
+        </tr>
+        <tr>
+          <td><strong>忠誠ボーナス</strong></td>
+          <td>勝利陣営の忠誠トークンを所持しており、消費した場合</td>
+          <td><span style="color: var(--gold);">+1 点</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div style="margin-top: 24px;">
+      <h3>忠誠トークンの獲得と活用</h3>
+      <p>各陣営最大1個まで所持可能。</p>
+      <ul>
+        <li><strong>獲得条件：</strong> セット終了時、<strong>2セット連続</strong>して同じ陣営に所属していた場合、その陣営の忠誠トークンを獲得（※セット途中で裏切っても終了時に戻っていれば連続扱い）。</li>
+        <li><strong>使い道①（裏切り）：</strong> 6回目以降の裏切り時、離脱陣営の忠誠トークンを消費して無料化。</li>
+        <li><strong>使い道②（得点化）：</strong> 所属陣営勝利時に消費して +1 点。</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 11. 現時点の暫定処理 -->
+  <section class="card" style="border-left: 4px solid #64748b;">
+    <h2><span class="num">★</span> 暫定処理・補足事項</h2>
+    <ul>
+      <li><strong>陣営の人数が0人になった場合：</strong> 戦闘は通常通り続行。0人側の陣営が勝利しても得点獲得者はいません。</li>
+      <li><strong>イベントカード13枚を使い切った場合：</strong> 以降の戦闘ラウンドは「平穏」と同じ扱い（イベントなし）で続行します。</li>
+      <li><strong>同点時のタイブレーク：</strong> ゲーム終了時に最高得点者が複数いた場合の処理は現在検討・調整中です。</li>
+    </ul>
+  </section>
+
+  <div class="footer">
+    勝つ方につきます 〜勇者と魔王のあいだ〜 &copy; Game Design Document
+  </div>
+</div>
+
+</body>
+</html>
