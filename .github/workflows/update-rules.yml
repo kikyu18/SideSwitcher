@@ -3,7 +3,8 @@ name: Update Rule HTML via Gemini
 on:
   issues:
     types: [opened, edited]
-
+  issue_comment:
+     types: [created]
 jobs:
   update-html:
     # 事故防止のため、タイトルに [rule-update] が含まれるIssueのみトリガー
@@ -24,7 +25,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install google-google-genai
+          pip install google-genai
 
       - name: Run update script
         env:
