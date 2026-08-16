@@ -1,10 +1,10 @@
 import os
 import sys
-import google.generativeai as genai
+from google import genai
 
 api_key = os.environ.get("GEMINI_API_KEY")
 issue_body = os.environ.get("ISSUE_BODY", "")
-html_file_path = "index.html"  # 更新対象のHTMLファイル名に合わせて変更
+html_file_path = "index.html"  # リポジトリ内のHTMLファイル名に合わせて変更
 
 if not issue_body.strip():
     print("Issue本文が空のため処理を中断します。")
@@ -16,8 +16,8 @@ if os.path.exists(html_file_path):
     with open(html_file_path, "r", encoding="utf-8") as f:
         current_html = f.read()
 
-genai.configure(api_key=api_key)
-model = genai.GenerativeModel("gemini-1.5-pro-latest")
+# 最新SDKでのクライアント初期化
+client = genai.Client(api_key=api_key)
 
 prompt = f"""
 あなたはボードゲームのルール説明用Webページのデザイナー兼エンジニアです。
@@ -33,7 +33,12 @@ prompt = f"""
 出力はMarkdownのコードブロック（```html ... ```）を一切含めず、<!DOCTYPE html>から始まる純粋なHTML文字列のみを出力してください。
 """
 
-response = model.generate_content(prompt)
+# 最新の推奨モデルを指定
+response = client.models.generate_content(
+    model="gemini-2.5-flash",
+    contents=prompt,
+)
+
 updated_html = response.text.strip()
 
 # マークダウン記号が混入した場合のトリミング
