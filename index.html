@@ -255,7 +255,7 @@
   .flow-steps {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 10px;
     margin: 16px 0;
   }
 
@@ -263,7 +263,7 @@
     background: rgba(15, 23, 42, 0.6);
     border: 1px solid var(--card-border);
     border-radius: 8px;
-    padding: 12px 16px;
+    padding: 14px 16px;
     display: flex;
     align-items: center;
     gap: 14px;
@@ -273,13 +273,13 @@
     background: var(--card-border);
     color: var(--gold);
     font-weight: 900;
-    width: 28px;
-    height: 28px;
+    width: 32px;
+    height: 32px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 0.85rem;
+    font-size: 0.9rem;
     flex-shrink: 0;
   }
 
@@ -325,15 +325,15 @@
     background: rgba(30, 41, 59, 0.5);
   }
 
-  /* Event Grid */
-  .event-grid {
+  /* Role Grid */
+  .role-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 12px;
     margin-top: 14px;
   }
 
-  .event-card {
+  .role-card {
     background: rgba(15, 23, 42, 0.6);
     border: 1px solid var(--card-border);
     border-radius: 8px;
@@ -341,7 +341,7 @@
     border-left: 4px solid var(--accent);
   }
 
-  .event-name {
+  .role-name {
     font-weight: 700;
     color: #fff;
     margin-bottom: 6px;
@@ -350,15 +350,7 @@
     align-items: center;
   }
 
-  .event-count {
-    font-size: 0.8rem;
-    color: var(--text-secondary);
-    background: rgba(255,255,255,0.06);
-    padding: 2px 6px;
-    border-radius: 4px;
-  }
-
-  .event-desc {
+  .role-desc {
     font-size: 0.88rem;
     color: var(--text-secondary);
     line-height: 1.5;
@@ -381,17 +373,6 @@
     font-size: 0.85rem;
     text-transform: uppercase;
     letter-spacing: 0.05em;
-  }
-
-  .badge-warn {
-    display: inline-block;
-    background: rgba(245, 158, 11, 0.2);
-    color: var(--gold);
-    padding: 2px 8px;
-    border-radius: 4px;
-    font-size: 0.8rem;
-    font-weight: bold;
-    margin-right: 6px;
   }
 
   .highlight {
@@ -421,10 +402,10 @@
   <!-- 1. ゲーム概要 -->
   <div class="lead-box">
     <p>プレイヤーは、人間と魔族の間に生まれた「どちらにも属しきれない者」となります。<br>
-    戦いを続ける「勇者軍」と「魔王軍」のどちらにつくかを判断し、ときには戦況を見て裏切りながら、自分の得点を伸ばしていきます。</p>
+    じゃんけんカードで激突する「勇者軍」と「魔王軍」の戦況を見極め、時には水面下で裏切りながら、自らの得点を最大化しましょう。</p>
     <div class="lead-quote">
-      重要なのは忠誠ではありません。<br>
-      「今、どちらにつくのが自分にとって最も得か」を判断するゲームです。
+      「勝てる陣営」につくか、それとも「ハイリスクな独占」を狙うか？<br>
+      戦闘の結果だけでなく「他人がどちらに残ったか」も土壇場まで分からない密室心理戦！
     </div>
   </div>
 
@@ -435,218 +416,199 @@
     <div style="margin-bottom: 20px;">
       <h3>勝利条件</h3>
       <p>セット終了時に<span class="highlight" style="color: var(--gold); font-size: 1.1em;">16点以上</span>のプレイヤーが出たらゲーム終了。<br>
-      最も累計得点が高いプレイヤーの完全勝利となります。（16点以上が複数いる場合も最高得点者が勝利）</p>
+      最も累計得点が高いプレイヤーの勝利となります。（最高得点者が複数の場合は全員勝利）</p>
     </div>
 
     <h3>使用するコンポーネント</h3>
     <div class="faction-grid">
       <div class="faction-card faction-hero">
-        <h4>勇者軍カード <span class="tag-badge badge-hero">計10枚</span></h4>
+        <h4>勇者軍 戦闘デッキ <span class="tag-badge badge-hero">計6枚</span></h4>
         <ul>
-          <li>小攻撃 × 9</li>
-          <li>勇者の一撃 × 1</li>
+          <li>グー × 2</li>
+          <li>チョキ × 2</li>
+          <li>パー × 2</li>
         </ul>
       </div>
       <div class="faction-card faction-demon">
-        <h4>魔王軍カード <span class="tag-badge badge-demon">計10枚</span></h4>
+        <h4>魔王军 戦闘デッキ <span class="tag-badge badge-demon">計6枚</span></h4>
         <ul>
-          <li>大攻撃 × 7</li>
-          <li>特守備 × 3</li>
+          <li>グー × 2</li>
+          <li>チョキ × 2</li>
+          <li>パー × 2</li>
         </ul>
       </div>
     </div>
 
     <div style="margin-top: 16px;">
-      <h4 style="color: var(--gold-light); margin-bottom: 8px;">その他のカード・トークン</h4>
+      <h4 style="color: var(--gold-light); margin-bottom: 8px;">その他のトークン・マーカー</h4>
       <ul>
-        <li><strong>イベントカード（計13枚）：</strong> 平穏×4、粛清×2、革命×1、飢餓×1、混乱×1、工作破壊×1、魔王軍覚醒×2、闇の咆哮×1</li>
         <li><strong>各プレイヤートークン：</strong> 裏切りトークン×5、勇者軍忠誠トークン×最大1、魔王軍忠誠トークン×最大1</li>
+        <li><strong>陣営選択マーカー / プロットカード：</strong> 各プレイヤーが秘密裏に「残留」「裏切り」を選択するために使用</li>
       </ul>
     </div>
   </section>
 
-  <!-- 3. ゲームの進行構造 -->
+  <!-- 3. 陣営宣言と序列 -->
   <section class="card">
-    <h2><span class="num">2</span> ゲームの進行フロー</h2>
-    <p>ゲームは複数の「<strong>セット</strong>」で進行します。1セット内で勇者軍または魔王軍のどちらかが勝利するまで「<strong>戦闘ラウンド</strong>」を繰り返します。</p>
-    
-    <div class="flow-steps">
-      <div class="step-box">
-        <div class="step-num">1</div>
-        <div class="step-content">初期ベット（セット開始時に陣営を決定・序列確定）</div>
-      </div>
-      <div class="step-box">
-        <div class="step-num">2</div>
-        <div class="step-content">戦闘ラウンドの実行（決着するまで繰り返し）</div>
-      </div>
-      <div class="step-box">
-        <div class="step-num">3</div>
-        <div class="step-content">勇者軍 または 魔王軍の勝利（セット決着）</div>
-      </div>
-      <div class="step-box">
-        <div class="step-num">4</div>
-        <div class="step-content">得点計算 & 忠誠判定</div>
-      </div>
-      <div class="step-box">
-        <div class="step-num">5</div>
-        <div class="step-content">16点到達者がいなければ、親を右隣に移して次のセットへ</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 4. 初期ベットと序列 -->
-  <section class="card">
-    <h2><span class="num">3</span> セット開始：初期ベットと序列</h2>
-    <p>全プレイヤーはセット開始時に「<strong>勇者軍</strong>」または「<strong>魔王軍</strong>」のどちらにつくかを宣言します。<br>
-    同じ陣営内では、加入した順番によって<strong>序列</strong>が決まります。</p>
+    <h2><span class="num">2</span> セット開始：陣営選択と序列</h2>
+    <p>セット開始時、全プレイヤーは「<strong>勇者軍</strong>」または「<strong>魔王軍</strong>」のどちらにつくかを宣言します。<br>
+    同じ陣営内では、宣言した順番によってプレイヤーの<strong>序列</strong>が決定します。</p>
     
     <table class="styled-table">
       <thead>
         <tr>
           <th>序列</th>
           <th>決定方法</th>
-          <th>役割・特徴</th>
+          <th>主な役割・能力</th>
         </tr>
       </thead>
       <tbody>
         <tr>
           <td><strong style="color: var(--gold);">幹部</strong></td>
           <td>陣営に<strong>最初</strong>に加入した人</td>
-          <td>セット勝利時に「幹部ボーナス(+1点)」の権利を得る。</td>
+          <td>戦闘で使用するカードの<strong>最終決定権</strong>を持つ。勝利時に「幹部ボーナス(+1点)」の権利を得る。</td>
         </tr>
         <tr>
           <td><strong style="color: var(--accent);">下っ端</strong></td>
           <td>陣営に<strong>最後</strong>に加入した人</td>
-          <td>毎ラウンド「下っ端効果（情報操作）」を行使できる。</td>
+          <td>裏向きの戦闘候補カードを検分し、<strong>1枚を除外（情報操作）</strong>できる。</td>
+        </tr>
+        <tr>
+          <td><strong>一般</strong></td>
+          <td>幹部・下っ端以外のプレイヤー</td>
+          <td>公開情報や下っ端の発言、周囲の挙動を読み取り、秘密裏に生き残りを図る。</td>
         </tr>
       </tbody>
     </table>
     <p style="font-size: 0.9rem; color: var(--text-secondary);">
       ※1人しかいない陣営では、そのプレイヤーが「幹部兼下っ端」となります。<br>
-      ※同時に宣言した場合は、親から時計回りの順番で優先順位を決定します。
+      ※同時に宣言した場合は、親（ディーラー）から時計回りの順で優先順位が決定します。
     </p>
   </section>
 
-  <!-- 5. 戦闘ラウンドの流れ -->
+  <!-- 4. 戦闘ラウンドの流れ -->
   <section class="card">
-    <h2><span class="num">4</span> 戦闘ラウンドの流れ</h2>
-    <p>各戦闘ラウンドは以下の5つのフェイズを順番に進めます。</p>
+    <h2><span class="num">3</span> 戦闘ラウンドの流れ（5ステップ）</h2>
+    <p>1セットの中で、決着がつくまで以下の「戦闘ラウンド」を繰り返します。</p>
 
     <div class="flow-steps">
       <div class="step-box">
-        <div class="step-num">①</div>
+        <div class="step-num">1</div>
         <div>
-          <div class="step-content" style="color: var(--gold-light);">下っ端効果フェイズ</div>
-          <div style="font-size: 0.88rem; color: var(--text-secondary);">山札情報の確認・操作（口頭で嘘の報告も可能）</div>
+          <div class="step-content" style="color: var(--gold-light);">戦闘カードのドロー & 公開</div>
+          <div style="font-size: 0.88rem; color: var(--text-secondary);">両陣営の山札からそれぞれ3枚引く。1枚を表向きに公開し、残り2枚は裏向きで伏せる。</div>
         </div>
       </div>
       <div class="step-box">
-        <div class="step-num">②</div>
+        <div class="step-num">2</div>
         <div>
-          <div class="step-content" style="color: var(--gold-light);">イベントカード公開フェイズ</div>
-          <div style="font-size: 0.88rem; color: var(--text-secondary);">イベント山札から1枚めくり、効果を即時適用</div>
+          <div class="step-content" style="color: var(--gold-light);">下っ端の検分 & 情報戦</div>
+          <div style="font-size: 0.88rem; color: var(--text-secondary);">両軍の下っ端は自軍の裏向き2枚を確認し、1枚を除外。残った1枚が「裏候補」となる。確認内容は口頭で他プレイヤーへ共有する（嘘をついてもよい）。</div>
         </div>
       </div>
       <div class="step-box">
-        <div class="step-num">③</div>
+        <div class="step-num">3</div>
         <div>
-          <div class="step-content" style="color: var(--gold-light);">裏切りフェイズ</div>
-          <div style="font-size: 0.88rem; color: var(--text-secondary);">プレイヤーはトークンや得点を消費して陣営を鞍替え可能</div>
+          <div class="step-content" style="color: var(--accent);">秘密裏の裏切り判断</div>
+          <div style="font-size: 0.88rem; color: var(--text-secondary);">全プレイヤーは「残留」か「反対陣営へ裏切る」かを伏せて秘密裏にプロットする。（この時点では非公開）</div>
         </div>
       </div>
       <div class="step-box">
-        <div class="step-num">④</div>
+        <div class="step-num">4</div>
         <div>
-          <div class="step-content" style="color: var(--gold-light);">戦闘フェイズ</div>
-          <div style="font-size: 0.88rem; color: var(--text-secondary);">勇者軍・魔王軍からカードを1枚ずつ出して判定</div>
+          <div class="step-content" style="color: var(--gold-light);">幹部のカード選択 & じゃんけん勝負</div>
+          <div style="font-size: 0.88rem; color: var(--text-secondary);">両軍の幹部は「公開されている1枚」か「裏候補1枚」のどちらかを指定。カードを同時公開し、じゃんけん判定を行う。</div>
         </div>
       </div>
       <div class="step-box">
-        <div class="step-num">⑤</div>
+        <div class="step-num">5</div>
         <div>
-          <div class="step-content" style="color: var(--gold-light);">エンドフェイズ</div>
-          <div style="font-size: 0.88rem; color: var(--text-secondary);">セット未決着なら次の戦闘ラウンドへ</div>
+          <div class="step-content" style="color: var(--gold-light);">裏切り一斉公開 & ラウンド処理</div>
+          <div style="font-size: 0.88rem; color: var(--text-secondary);">全員の「残留／裏切り」を一斉に公開して所属を確定する。戦闘結果に応じたセット勝敗・得点処理を行う。</div>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 6. 下っ端効果 -->
-  <section class="card">
-    <h2><span class="num">5</span> 下っ端効果（情報戦）</h2>
-    <div class="faction-grid">
-      <div class="faction-card faction-demon">
-        <h4>魔王軍の下っ端 <span class="tag-badge badge-demon">未来を深く読む</span></h4>
-        <p><strong>魔王軍が少数または同数：</strong><br>勇者山札の<strong>上1枚</strong>を見る。</p>
-        <p><strong>魔王軍が多数派：</strong><br>勇者山札の<strong>上3枚</strong>を見る。</p>
-        <p style="font-size: 0.85rem; color: var(--demon-light);">※カードの並び順は変更できません。</p>
-      </div>
-
-      <div class="faction-card faction-hero">
-        <h4>勇者軍の下っ端 <span class="tag-badge badge-hero">未来を書き換える</span></h4>
-        <p><strong>勇者軍が少数または同数：</strong><br>魔王山札の上1枚を見て、「そのまま上」か「山札の一番下」へ送る。</p>
-        <p><strong>勇者軍が多数派：</strong><br>魔王山札の上2枚を確認し、それぞれ「上」または「一番下」へ移動可能。</p>
       </div>
     </div>
 
     <div class="example-box">
-      <div class="example-title">情報共有のルール（ブラフ可能）</div>
-      下っ端は確認した情報を<strong>必ず口頭で共有</strong>します。ただし、<strong style="color: #fff;">嘘をついても構いません。</strong><br>
-      ※カードそのものを直接他プレイヤーへ見せることは禁止です。
+      <div class="example-title">下っ端の情報操作（ブラフ可）</div>
+      下っ端は裏カードの確認後、内容を自由に発言できます。<br>
+      例：「裏カードはグーだったよ！」と言っておきながら、実際はチョキを残して相手のパーを誘う……といったブラフが可能です。（※カード自体を直接他人に公開することは禁止）
     </div>
   </section>
 
-  <!-- 7. イベント一覧 -->
+  <!-- 5. 勝敗ルール & 構造 -->
   <section class="card">
-    <h2><span class="num">6</span> イベントカード一覧</h2>
-    <p>下っ端効果の後、イベントカードを1枚公開します。効果は原則そのラウンドのみ有効です。</p>
+    <h2><span class="num">4</span> じゃんけん勝敗ルール</h2>
+    <p>両軍の幹部が選んだカードを同時公開し、以下のルールで勝敗を判定します。</p>
 
-    <div class="event-grid">
-      <div class="event-card">
-        <div class="event-name"><span>平穏</span> <span class="event-count">4枚</span></div>
-        <div class="event-desc">何も起こりません。平穏な戦況です。</div>
+    <table class="styled-table">
+      <thead>
+        <tr>
+          <th>陣営</th>
+          <th>じゃんけん勝利条件</th>
+          <th>勝率の目安</th>
+          <th>特徴・配当リスク</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong style="color: var(--hero-light);">勇者軍</strong></td>
+          <td>じゃんけんに<strong style="color: var(--hero-light);">「勝ち」</strong>で勝利</td>
+          <td>約 1/3 (33%)</td>
+          <td>勝率は低いが、勝利した際の後述する「配分プール」が非常に大きいハイリスク・ハイリターン陣営。</td>
+        </tr>
+        <tr>
+          <td><strong style="color: var(--demon-light);">魔王軍</strong></td>
+          <td>じゃんけんに<strong style="color: var(--demon-light);">「勝ち」または「あいこ」</strong>で勝利</td>
+          <td>約 2/3 (67%)</td>
+          <td>圧倒的に勝利しやすい安全陣営。ただし勝ちやすいため人が集まりやすく、1人当たりの取り分が減りやすい。</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="faction-grid">
+      <div class="faction-card faction-demon">
+        <h4>魔王軍の安全策</h4>
+        <p>「あいこ」でも勝利できるため勝ちやすい。しかし、全員が魔王軍に逃げ込むと勝利時の配当が分散して薄まってしまいます。</p>
       </div>
-      <div class="event-card">
-        <div class="event-name"><span>粛清</span> <span class="event-count">2枚</span></div>
-        <div class="event-desc">両軍の幹部を一番後ろへ移動させ下っ端にします（1人陣営は対象外）。新下っ端の能力発動は次ラウンドから。序列変更はセット中継続。</div>
-      </div>
-      <div class="event-card">
-        <div class="event-name"><span>革命</span> <span class="event-count">1枚</span></div>
-        <div class="event-desc">このラウンドでセットが決着した場合、「幹部ボーナス+1点」が無効化されます。決着しなければ何も起こりません。</div>
-      </div>
-      <div class="event-card">
-        <div class="event-name"><span>飢餓</span> <span class="event-count">1枚</span></div>
-        <div class="event-desc">ラウンド終了時、<strong>人数が多い陣営に所属する全員</strong>が累計得点-1（勝敗不問 / 0点未満にはならない）。同数の場合は不発。</div>
-      </div>
-      <div class="event-card">
-        <div class="event-name"><span>混乱</span> <span class="event-count">1枚</span></div>
-        <div class="event-desc">このラウンドの裏切りでは、全プレイヤーがトークンや得点を消費せず「無料」で1回裏切れます。</div>
-      </div>
-      <div class="event-card">
-        <div class="event-name"><span>工作破壊</span> <span class="event-count">1枚</span></div>
-        <div class="event-desc">両軍の残り山札をシャッフルします。下っ端の山札情報は無効化されます（過去情報としての会話は可能）。</div>
-      </div>
-      <div class="event-card">
-        <div class="event-name"><span>魔王軍覚醒</span> <span class="event-count">2枚</span></div>
-        <div class="event-desc">魔王軍はカードを2枚引きます。勇者カード公開前に魔王軍幹部が使用する1枚を選択し、残りは山札の一番下へ戻します。</div>
-      </div>
-      <div class="event-card">
-        <div class="event-name"><span>闇の咆哮</span> <span class="event-count">1枚</span></div>
-        <div class="event-desc">このラウンドのみ、「大攻撃」成功時の攻撃成功数を<strong>+2</strong>（例：成功数1で成功→3になり即座に魔王軍勝利）。</div>
+      <div class="faction-card faction-hero">
+        <h4>勇者軍の一発逆転</h4>
+        <p>勝率は低いが、相手が裏をかいて勝ち筋を残せば独占のチャンス！「誰もいない勇者軍」で勝てば膨大な得点を独り占めできます。</p>
       </div>
     </div>
   </section>
 
-  <!-- 8. 裏切り & 寝返りボーナス -->
+  <!-- 6. 役割と心理戦 -->
   <section class="card">
-    <h2><span class="num">7</span> 裏切りシステム & 寝返りボーナス</h2>
-    <p>イベント公開後、プレイヤーは反対陣営へ裏切ることができます。</p>
+    <h2><span class="num">5</span> プレイヤーの役割とジレンマ</h2>
+    <p>立場によって立ち回りと得られる情報が異なります。</p>
+
+    <div class="role-grid">
+      <div class="role-card">
+        <div class="role-name"><span>幹部</span> <span class="tag-badge badge-pool">最終決断者</span></div>
+        <div class="role-desc">公開カードと下っ端の言葉（裏候補）を天秤にかけ、どのカードで勝負するかを決定。勝利時の幹部ボーナス(+1点)を狙う。</div>
+      </div>
+      <div class="role-card">
+        <div class="role-name"><span>下っ端</span> <span class="tag-badge badge-pool">情報操作者</span></div>
+        <div class="role-desc">裏カード2枚を検分し、1枚を消去して候補を絞り込む。本当の情報を教えて味方を勝たせるか、嘘をついて全員を騙すかの主導権を握る。</div>
+      </div>
+      <div class="role-card">
+        <div class="role-name"><span>一般プレイヤー</span> <span class="tag-badge badge-pool">潜伏・寝返り</span></div>
+        <div class="role-desc">下っ端の発言の真偽や、他プレイヤーの怪しい動きを察知。じゃんけん結果が出る前に「どちらに付くか」を秘密裏に判断する。</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. 裏切りシステム & 寝返りボーナス -->
+  <section class="card">
+    <h2><span class="num">6</span> 裏切りシステム & 寝返りボーナス</h2>
+    <p>ステップ3にて、プレイヤーは相手陣営へと鞍替え（裏切り）を行うことができます。</p>
     
     <div style="margin: 16px 0;">
       <h4 style="color: var(--gold-light); margin-bottom: 8px;">裏切りのコスト</h4>
       <ul>
-        <li><strong>1〜5回目の裏切り：</strong> 「裏切りトークン」を1個消費して無料で裏切る。</li>
-        <li><strong>6回目以降の裏切り：</strong> 以下のいずれかを選択して支払う。
+        <li><strong>1〜5回目の裏切り：</strong> 「裏切りトークン」を1個消費して裏切る。</li>
+        <li><strong>6回目以降の裏切り：</strong> 以下のいずれかを支払う。
           <ol style="margin-left: 20px; margin-top: 4px;">
             <li>離脱する陣営の「忠誠トークン」を1個消費する</li>
             <li>自身の「累計得点」を -1 点する（※現在得点が0点の場合は選択不可）</li>
@@ -657,72 +619,18 @@
 
     <div class="example-box">
       <div class="example-title">寝返り成功ボーナス (+1点)</div>
-      <strong>セット開始時とは異なる陣営</strong>に所属した状態でその陣営が勝利した場合、寝返り成功として <span class="highlight" style="color: var(--gold);">+1点</span> を獲得！
+      <strong>セット開始時とは異なる陣営</strong>へ裏切り、その陣営がセット勝利を迎えた場合、見事な寝返りとして <span class="highlight" style="color: var(--gold);">+1点</span> を獲得！
       <div style="font-size: 0.85rem; margin-top: 6px; color: var(--text-secondary);">
         ✔ 魔王軍で開始 → 勇者軍へ裏切る → 勇者軍勝利 ＝ <strong>適用（+1点）</strong><br>
-        ✖ 魔王軍で開始 → 勇者軍へ裏切る → 再び魔王軍に戻る → 魔王軍勝利 ＝ <strong>不適用（開始時と同陣営のため）</strong>
+        ✖ 魔王军で開始 → 勇者軍へ裏切る → 再び魔王軍に戻る → 魔王軍勝利 ＝ <strong>不適用（開始時と同陣営のため）</strong>
       </div>
     </div>
   </section>
 
-  <!-- 9. 戦闘 & 勝敗判定 -->
+  <!-- 8. 得点計算 & 忠誠トークン -->
   <section class="card">
-    <h2><span class="num">8</span> 戦闘の組み合わせと効果</h2>
-    <p>勇者軍山札の上1枚と、魔王軍山札の上1枚をめくって対戦させます。</p>
-
-    <table class="styled-table">
-      <thead>
-        <tr>
-          <th style="width: 35%;">組み合わせ</th>
-          <th>戦闘結果と処理</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><strong style="color: var(--hero-light);">小攻撃</strong> × <strong style="color: var(--demon-light);">大攻撃</strong></td>
-          <td>魔王軍の攻撃成功。<strong style="color: var(--demon-light);">魔王軍の成功数 +1</strong></td>
-        </tr>
-        <tr>
-          <td><strong style="color: var(--hero-light);">小攻撃</strong> × <strong style="color: var(--demon-light);">特守備</strong></td>
-          <td>相殺。何も起こりません。</td>
-        </tr>
-        <tr>
-          <td><strong style="color: var(--gold);">勇者の一撃</strong> × <strong style="color: var(--demon-light);">大攻撃</strong></td>
-          <td><strong style="color: var(--gold); font-size: 1.05em;">その瞬間に勇者軍のセット勝利！</strong></td>
-        </tr>
-        <tr>
-          <td><strong style="color: var(--gold);">勇者の一撃</strong> × <strong style="color: var(--demon-light);">特守備</strong></td>
-          <td>
-            <strong>勇者の一撃が防がれる！</strong> 以下のリセット＆圧縮処理を行う：
-            <ol style="margin-left: 20px; font-size: 0.88rem; margin-top: 4px; color: var(--text-secondary);">
-              <li>魔王軍の攻撃成功数を <strong>0</strong> にリセット</li>
-              <li>魔王軍山札を10枚に戻してシャッフル</li>
-              <li>勇者軍の捨て札にある「小攻撃」を<strong>最大3枚ゲームから除外</strong></li>
-              <li>「勇者の一撃」＋残りの「小攻撃」で勇者山札を作り直す</li>
-              <li>同じセットをそのまま続行（※戦闘が長引くほど勇者の一撃が出やすくなる！）</li>
-            </ol>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-
-    <h3>セット勝利条件</h3>
-    <div class="faction-grid">
-      <div class="faction-card faction-demon">
-        <h4>魔王軍の勝利条件</h4>
-        <p>大攻撃を累計 <strong style="color: var(--demon-light); font-size: 1.1em;">3回成功</strong> させる。</p>
-      </div>
-      <div class="faction-card faction-hero">
-        <h4>勇者軍の勝利条件</h4>
-        <p>「勇者の一撃」を魔王軍の「大攻撃」に <strong style="color: var(--hero-light); font-size: 1.1em;">直撃</strong> させる。</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- 10. 得点計算 & 忠誠トークン -->
-  <section class="card">
-    <h2><span class="num">9</span> セット決着時の得点計算</h2>
-    <p>セットが終了したら、勝利した陣営に所属しているプレイヤー全員が得点を獲得します。</p>
+    <h2><span class="num">7</span> セット決着時の得点計算</h2>
+    <p>じゃんけん判定と裏切り一斉公開を経てセットが決着した際、<strong>勝利した陣営に最終的に所属しているプレイヤー全員</strong>が得点を獲得します。</p>
 
     <div class="faction-grid" style="margin-bottom: 16px;">
       <div class="faction-card faction-demon">
@@ -740,7 +648,7 @@
       <thead>
         <tr>
           <th>ボーナス名</th>
-          <th>条件</th>
+          <th>獲得条件</th>
           <th>獲得点</th>
         </tr>
       </thead>
@@ -752,17 +660,17 @@
         </tr>
         <tr>
           <td><strong>幹部ボーナス</strong></td>
-          <td>勝利陣営の幹部（※「革命」発生時は無効）</td>
+          <td>勝利陣営の幹部である場合</td>
           <td><span style="color: var(--gold);">+1 点</span></td>
         </tr>
         <tr>
           <td><strong>寝返り成功ボーナス</strong></td>
-          <td>セット開始時と異なる陣営で勝利を迎えたプレイヤー</td>
+          <td>セット開始時と異なる陣営で勝利を迎えた場合</td>
           <td><span style="color: var(--gold);">+1 点</span></td>
         </tr>
         <tr>
           <td><strong>忠誠ボーナス</strong></td>
-          <td>勝利陣営の忠誠トークンを所持しており、消費した場合</td>
+          <td>勝利陣営の忠誠トークンを所持しており、それを消費した場合</td>
           <td><span style="color: var(--gold);">+1 点</span></td>
         </tr>
       </tbody>
@@ -772,20 +680,20 @@
       <h3>忠誠トークンの獲得と活用</h3>
       <p>各陣営最大1個まで所持可能。</p>
       <ul>
-        <li><strong>獲得条件：</strong> セット終了時、<strong>2セット連続</strong>して同じ陣営に所属していた場合、その陣営の忠誠トークンを獲得（※セット途中で裏切っても終了時に戻っていれば連続扱い）。</li>
+        <li><strong>獲得条件：</strong> セット終了時、<strong>2セット連続</strong>して同じ陣営に所属していた場合、その陣営の忠誠トークンを獲得。</li>
         <li><strong>使い道①（裏切り）：</strong> 6回目以降の裏切り時、離脱陣営の忠誠トークンを消費して無料化。</li>
         <li><strong>使い道②（得点化）：</strong> 所属陣営勝利時に消費して +1 点。</li>
       </ul>
     </div>
   </section>
 
-  <!-- 11. 現時点の暫定処理 -->
+  <!-- 9. 補足事項 -->
   <section class="card" style="border-left: 4px solid #64748b;">
-    <h2><span class="num">★</span> 暫定処理・補足事項</h2>
+    <h2><span class="num">★</span> 補足事項</h2>
     <ul>
-      <li><strong>陣営の人数が0人になった場合：</strong> 戦闘は通常通り続行。0人側の陣営が勝利しても得点獲得者はいません。</li>
-      <li><strong>イベントカード13枚を使い切った場合：</strong> 以降の戦闘ラウンドは「平穏」と同じ扱い（イベントなし）で続行します。</li>
-      <li><strong>同点時のタイブレーク：</strong> ゲーム終了時に最高得点者が複数いた場合の処理は現在検討・調整中です。</li>
+      <li><strong>所属人数が0人の陣営が勝利した場合：</strong> じゃんけん処理は通常通り行いますが、誰もその陣営に所属していなければ、配点プールからの得点獲得者は出ません。</li>
+      <li><strong>デッキの再構成：</strong> 戦闘デッキ（6枚）が尽きた場合、捨て札をすべてシャッフルして新しい山札を作り直します。</li>
+      <li><strong>一斉公開での同時裏切り：</strong> 裏切りの意思表示は全員同時に開示するため、他人のプロットを見てから裏切りを変更することはできません。</li>
     </ul>
   </section>
 
